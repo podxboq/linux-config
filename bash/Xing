@@ -1,0 +1,11 @@
+artista=`mp3info -p %a "$1"`
+album=`mp3info -p %l "$1"`
+year=`mp3info -p %y "$1"`
+posicion=`mp3info -p %n "$1"`
+if [ "1" -eq "${#posicion}" ]; then
+  posicion=0$posicion
+fi
+cancion=`mp3info -p %t "$1"`
+estilo=`mp3info -p %g "$1"`
+mkdir "./$artista - $year - $album"
+lame -h --mp3input -S --add-id3v2 --ta "$artista" --tl "$album" --ty $year --tg "$estilo" --tt "$cancion" --tn $posicion "$1" "./$artista - $year - $album/$posicion - $cancion.mp3" 

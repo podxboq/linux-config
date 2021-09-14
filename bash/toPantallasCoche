@@ -1,0 +1,2 @@
+ffmpeg -i Shazam.mp4 -c:a libmp3lame -c:v libxvid -s 720x576 -b:v 5000k Shazam.avi
+

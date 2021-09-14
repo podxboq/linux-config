@@ -1,0 +1,6 @@
+nlines=`ls ~/.wallpapers/ | wc -l`
+rand1=`expr $RANDOM % $nlines`
+rand2=`expr $rand1 + 1`
+filename=`ls ~/.wallpapers | sed -n "$rand2{p;q;}"`
+e17setroot -s ~/.wallpapers/$filename
+Esetroot -s ~/.wallpapers/$filename
