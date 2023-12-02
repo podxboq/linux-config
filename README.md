@@ -8,5 +8,5 @@ Personal files for linux config
 - **Decoraciones de las ventanas**: Brisa
 - **Tipos de letra**: Noto Sans 8pt
 - **Iconos**: Brisa
-- **Cursores**: Brisa
-- **Pantalla de bienvenida**: Animation-Galaxy-kuys4
+- **Cursores**: Volantes, Volantes-light
+- **Pantalla de bienvenida**: Animation-Galaxy-kuys4, black hole
