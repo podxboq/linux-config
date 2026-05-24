@@ -1,0 +1,21 @@
+{
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "podxboq"
+            }
+        ],
+        "Category": "Global Themes (Plasma 6)",
+        "ServiceTypes": [
+            "Plasma/LookAndFeel"
+        ],
+        "EnabledByDefault": true,
+        "Description": "Tema global Neblina — paleta clara inspirada en Apple, fuentes Source Sans 3, decoración Klassy",
+        "Id": "com.podxboq.neblina",
+        "License": "GPL-3.0",
+        "Name": "Neblina",
+        "Version": "1.0",
+        "X-Plasma-APIVersion": "2"
+    }
+}

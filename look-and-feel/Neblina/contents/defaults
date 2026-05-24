@@ -1,0 +1,36 @@
+[kcminputrc][Mouse]
+cursorTheme=volantes_light_cursors
+cursorSize=32
+
+[kdeglobals][General]
+ColorScheme=Neblina
+font=Source Sans 3,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+fixed=JetBrains Mono,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+menuFont=Source Sans 3,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+toolBarFont=Source Sans 3,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+smallestReadableFont=Source Sans 3,8,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
+
+[kdeglobals][KDE]
+widgetStyle=QtCurve
+AnimationDurationFactor=2
+contrast=4
+
+[kdeglobals][Icons]
+Theme=klassy
+
+[kdeglobals][Sounds]
+Theme=ocean
+
+[kwinrc][org.kde.kdecoration2]
+library=org.kde.klassy
+theme=Klassy
+BorderSize=None
+BorderSizeAuto=false
+ButtonsOnLeft=MNSF
+ButtonsOnRight=HIXA
+
+[plasmarc][Theme]
+name=breath-light
+
+[ksplashrc][KSplash]
+Theme=org.kde.klassykitelightbottompanel.desktop
