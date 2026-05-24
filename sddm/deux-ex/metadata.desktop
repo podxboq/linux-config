@@ -1,0 +1,13 @@
+[SddmGreeterTheme]
+Name=Deux Ex
+Description=Theme for SSDM based on Deux Ex game
+Author=podxboq
+License=GPLv.3
+Type=sddm-theme
+Version=1.0
+Screenshot=preview.png
+MainScript=main.qml
+ConfigFile=theme.conf
+TranslationsDirectory=translations
+Email=podxboq@gmail.com
+Theme-Id=deux-ex
