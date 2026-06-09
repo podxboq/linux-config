@@ -6,9 +6,9 @@ export FZF_DEFAULT_OPTS="
   --height=40%
   --layout=reverse
   --border=rounded
-  --color=bg+:#F2F2F7,bg:#FFFFFF,spinner:#2C6E8A,hl:#2C6E8A
-  --color=fg:#072436,header:#8FA3AF,info:#2C6E8A,pointer:#2C6E8A
-  --color=marker:#2C6E8A,fg+:#072436,prompt:#2C6E8A,hl+:#5B8FA8"
+  --color=bg+:#1A3040,bg:#0D1F2D,spinner:#5B8FA8,hl:#5B8FA8
+  --color=fg:#C8D8E2,header:#4A6070,info:#5B8FA8,pointer:#7BAFD4
+  --color=marker:#2ECC71,fg+:#E8F1F5,prompt:#5B8FA8,hl+:#7BAFD4"
 
 # ── zoxide ────────────────────────────────────────────────────────────────────
 # z <dir>   → saltar a directorio frecuente
@@ -16,7 +16,7 @@ export FZF_DEFAULT_OPTS="
 eval "$(zoxide init zsh)"
 
 # ── bat ───────────────────────────────────────────────────────────────────────
-export BAT_THEME="GitHub"
+export BAT_THEME="TwoDark"
 alias cat='bat --paging=never'
 export MANPAGER="sh -c 'col -bx | bat -l man --paging=always'"
 
