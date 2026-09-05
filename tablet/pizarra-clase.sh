@@ -37,16 +37,10 @@ if [ -f "$ESTADO" ]; then
     echo "Aviso: una sesión anterior no llegó a restaurar la tablet."
     echo "       Se recupera el estado guardado entonces."
 else
-    PREV_AUTOROT=$(leer system accelerometer_rotation)
-    PREV_ROT=$(leer system user_rotation)
     PREV_ZEN=$(leer global zen_mode)
-    # Valores sensatos si el ajuste no estaba definido.
-    case "$PREV_AUTOROT" in 0|1) :;; *) PREV_AUTOROT=1;; esac
-    case "$PREV_ROT"     in 0|1|2|3) :;; *) PREV_ROT=0;; esac
-    case "$PREV_ZEN"     in 0|1|2|3) :;; *) PREV_ZEN=0;; esac
+    case "$PREV_ZEN" in 0|1|2|3) :;; *) PREV_ZEN=0;; esac
     mkdir -p "$(dirname "$ESTADO")"
-    printf 'PREV_AUTOROT=%s\nPREV_ROT=%s\nPREV_ZEN=%s\n' \
-        "$PREV_AUTOROT" "$PREV_ROT" "$PREV_ZEN" > "$ESTADO"
+    printf 'PREV_ZEN=%s\n' "$PREV_ZEN" > "$ESTADO"
 fi
 
 restaurar() {
@@ -56,24 +50,20 @@ restaurar() {
         3) adb shell cmd notification set_dnd alarms   >/dev/null 2>&1 || true;;
         *) adb shell cmd notification set_dnd off      >/dev/null 2>&1 || true;;
     esac
-    adb shell settings put system user_rotation "${PREV_ROT:-0}"              >/dev/null 2>&1 || true
-    adb shell settings put system accelerometer_rotation "${PREV_AUTOROT:-1}" >/dev/null 2>&1 || true
-    adb shell svc power stayon false                                          >/dev/null 2>&1 || true
+    adb shell svc power stayon false >/dev/null 2>&1 || true
     rm -f "$ESTADO"
     echo
-    echo "Tablet restaurada (No molestar y rotación como estaban)."
+    echo "Tablet restaurada (No molestar como estaba)."
 }
 trap restaurar EXIT
 
 # --- Modo clase ---
 adb shell cmd notification set_dnd "$DND"              >/dev/null 2>&1 || true
-adb shell settings put system accelerometer_rotation 0 >/dev/null 2>&1 || true
-adb shell settings put system user_rotation 0          >/dev/null 2>&1 || true
 adb shell svc power stayon usb                         >/dev/null 2>&1 || true
 adb shell am start -n "$APP"                           >/dev/null 2>&1 || true
 
 echo "Tablet:  $(adb shell getprop ro.product.model 2>/dev/null | tr -d '\r')"
-echo "Modo clase: No molestar ($DND) · vertical fijo · pantalla activa"
+echo "Modo clase: No molestar ($DND) · pantalla activa"
 echo "Ventana: «$TITULO» — selecciónala al compartir pantalla"
 echo "(Cierra la ventana para restaurar la tablet)"
 echo

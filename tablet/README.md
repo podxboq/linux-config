@@ -22,13 +22,14 @@ en la videoconferencia. Se escribe en la tablet con el S Pen, a latencia nativa.
 ./pizarra-clase.sh [título-de-ventana]
 ```
 
-Al arrancar: activa No molestar, fija la orientación vertical, mantiene la
-pantalla encendida y abre la app de notas. Al cerrar la ventana lo revierte todo.
+Al arrancar: activa No molestar, mantiene la pantalla encendida y abre la app de
+notas. Al cerrar la ventana lo revierte todo.
 
-Se usa vertical porque es la orientación natural para escribir a mano. Al
-compartir, la ventana queda alta y estrecha: en una videoconferencia 16:9 deja
-franjas a los lados. Para llenar el ancho, girar la tablet y aplicar el recorte
-que se indica más abajo.
+**La orientación no se toca**: la tablet queda como la coloques y scrcpy sigue
+los giros automáticamente. En vertical, que es lo natural para escribir a mano,
+la ventana queda alta y estrecha y en una videoconferencia 16:9 deja franjas a
+los lados; en horizontal se llena el ancho pero aparecen las barras del sistema
+en apps que no las oculten, y ahí entra el recorte que se explica más abajo.
 
 ### Variables de entorno
 
@@ -73,11 +74,12 @@ tablet en horizontal los ejes quedan transpuestos: para quitar 50 px arriba y
 inmersivo; el ajuste se guarda sin protestar pero no tiene ningún efecto. Por eso
 la interfaz limpia se consigue recortando en el lado del PC.
 
-**El estado previo se guarda en `~/.cache/pizarra-clase.estado`.** Si una sesión
-muere sin ejecutar su `trap` (cierre de sesión, tirón del cable), el fichero
-sobrevive y la siguiente ejecución lo respeta en lugar de tomar el modo clase
-como si fuera la configuración normal. Sin esto, los ajustes originales de
-rotación y No molestar se perderían de forma silenciosa y permanente.
+**El estado previo del No molestar se guarda en `~/.cache/pizarra-clase.estado`.**
+Si una sesión muere sin ejecutar su `trap` (cierre de sesión, tirón del cable),
+el fichero sobrevive y la siguiente ejecución lo respeta en lugar de tomar el
+modo clase como si fuera la configuración normal. Sin esto, el ajuste original
+se perdería de forma silenciosa y permanente. Por el mismo motivo, no conviene
+borrar ese fichero a mano mientras haya una sesión abierta.
 
 **`--no-control`** deja la ventana en sólo lectura: un clic accidental del ratón
 durante la clase no puede pintar en la tablet.
