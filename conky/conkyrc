@@ -11,9 +11,9 @@ conky.config = {
     text_buffer_size = 2048,
 
     gap_x = 14,
-    gap_y = 14,
-    minimum_width = 200,
-    maximum_width = 200,
+    gap_y = 60,
+    minimum_width = 240,
+    maximum_width = 240,
 
     own_window = true,
     own_window_type = 'normal',
@@ -31,7 +31,7 @@ conky.config = {
     draw_graph_borders = false,
 
     use_xft = true,
-    font = 'Source Sans 3:size=8',
+    font = 'Source Sans 3:size=11',
     xftalpha = 1.0,
     uppercase = false,
 
@@ -47,42 +47,47 @@ conky.config = {
 
 conky.text = [[
 ${alignc}${color1}${font Source Sans 3:bold:size=32}${time %H:%M}${font}${color}
-${alignc}${color2}${font Source Sans 3:size=9}${time %A, %-d de %B de %Y}${font}${color}
+${alignc}${color2}${font Source Sans 3:size=10}${time %A, %-d de %B de %Y}${font}${color}
 
 ${color3}${hr 1}${color}
-${color1}${font Source Sans 3:semibold:size=7}SISTEMA${font}${color}
+${color1}${font Source Sans 3:semibold:size=9}SISTEMA${font}${color}
 ${color2}  ${sysname} ${kernel}
   Uptime: ${color}${uptime_short}
 
 ${color3}${hr 1}${color}
-${color1}${font Source Sans 3:semibold:size=7}CPU${font}  ${color2}${hwmon coretemp temp 1}°C${alignr}${color}${cpu cpu0}%
-${color1}${cpubar cpu0 4,180}${color}
-${color1}${cpugraph cpu0 28,180 2C6E8A 7BAFD4}${color}
+${color1}${font Source Sans 3:semibold:size=9}CPU${font}  ${color2}${hwmon coretemp temp 1}°C${alignr}${color}${cpu cpu0}%
+${color1}${cpubar cpu0 4,220}${color}
+${color1}${cpugraph cpu0 28,220 2C6E8A 7BAFD4}${color}
 ${color2}  ${top name 1}${alignr}${top cpu 1}%
   ${top name 2}${alignr}${top cpu 2}%
   ${top name 3}${alignr}${top cpu 3}%
 
 ${color3}${hr 1}${color}
-${color1}${font Source Sans 3:semibold:size=7}MEMORIA${font}${alignr}${color2}${mem} / ${memmax}${color}
-${color1}${membar 4,180}${color}
-${color1}${memgraph 28,180 2C6E8A 7BAFD4}${color}
+${color1}${font Source Sans 3:semibold:size=9}MEMORIA${font}${alignr}${color2}${mem} / ${memmax}${color}
+${color1}${membar 4,220}${color}
+${color1}${memgraph 28,220 2C6E8A 7BAFD4}${color}
 ${color2}  ${top_mem name 1}${alignr}${top_mem mem 1}%
   ${top_mem name 2}${alignr}${top_mem mem 2}%
   ${top_mem name 3}${alignr}${top_mem mem 3}%
 
 ${color3}${hr 1}${color}
-${color1}${font Source Sans 3:semibold:size=7}DISCO${font}${alignr}${color2}${fs_used /} / ${fs_size /}${color}
-${color1}${fs_bar 4,180 /}${color}
-${color1}${diskiograph nvme0n1 28,180 2C6E8A 7BAFD4}${color}
+${color1}${font Source Sans 3:semibold:size=9}DISCO${font}${alignr}${color2}${fs_used /} / ${fs_size /}${color}
+${color1}${fs_bar 4,220 /}${color}
+${color1}${diskiograph nvme0n1 28,220 2C6E8A 7BAFD4}${color}
 
 ${color3}${hr 1}${color}
-${color1}${font Source Sans 3:semibold:size=7}RED${font}  ${color2}${wireless_essid wlo1}${alignr}${wireless_link_qual_perc wlo1}%${color}
-${color1}${wireless_link_bar 4,180 wlo1}${color}
+${color1}${font Source Sans 3:semibold:size=9}RED${font}  ${color2}${wireless_essid wlo1}${alignr}${wireless_link_qual_perc wlo1}%${color}
+${color1}${wireless_link_bar 4,220 wlo1}${color}
 ${color2}  ↓ ${color}${downspeed wlo1}${alignr}${color2}↑ ${color}${upspeed wlo1}
-${color1}${downspeedgraph wlo1 28,86 2ECC71 27AE60} ${upspeedgraph wlo1 28,86 5B8FA8 2C6E8A}${color}
+${color1}${downspeedgraph wlo1 28,108 2ECC71 27AE60} ${upspeedgraph wlo1 28,108 5B8FA8 2C6E8A}${color}
 ${color3}  ${addr wlo1}${color}
 
 ${color3}${hr 1}${color}
-${color1}${font Source Sans 3:semibold:size=7}BATERÍA${font}${alignr}${color}${battery_percent BAT0}%  ${color2}${battery_status BAT0}${color}
-${color1}${battery_bar 4,180 BAT0}${color}
+${color1}${font Source Sans 3:semibold:size=9}BATERÍA${font}${alignr}${color}${battery_percent BAT0}%  ${color2}${battery_status BAT0}${color}
+${color1}${battery_bar 4,220 BAT0}${color}
+
+${color3}${hr 1}${color}
+${color1}${font Source Sans 3:semibold:size=9}CLAUDE CODE${font}${color}
+${color2}${font Source Sans 3:size=10}${execi 300 python3 ~/src/linux-config/conky/claude-stats.py}${font}${color}
+
 ]]
