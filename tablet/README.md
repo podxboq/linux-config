@@ -22,16 +22,21 @@ en la videoconferencia. Se escribe en la tablet con el S Pen, a latencia nativa.
 ./pizarra-clase.sh [título-de-ventana]
 ```
 
-Al arrancar: activa No molestar, fija la orientación horizontal, mantiene la
+Al arrancar: activa No molestar, fija la orientación vertical, mantiene la
 pantalla encendida y abre la app de notas. Al cerrar la ventana lo revierte todo.
+
+Se usa vertical porque es la orientación natural para escribir a mano. Al
+compartir, la ventana queda alta y estrecha: en una videoconferencia 16:9 deja
+franjas a los lados. Para llenar el ancho, girar la tablet y aplicar el recorte
+que se indica más abajo.
 
 ### Variables de entorno
 
 | Variable | Por defecto | Para qué |
 |---|---|---|
-| `PIZARRA_APP` | Samsung Notes | Actividad a lanzar (`paquete/.Actividad`) |
+| `PIZARRA_APP` | NoteIn | Actividad a lanzar (`paquete/.Actividad`) |
 | `PIZARRA_DND` | `none` | `none` silencio total, `priority` deja pasar favoritos |
-| `PIZARRA_CROP` | `1190:2112:50:0` | Recorte de las barras de Android |
+| `PIZARRA_CROP` | vacío | Recorte de barras (innecesario con NoteIn) |
 | `PIZARRA_BITRATE` | `12M` | Calidad del vídeo |
 
 Para averiguar la actividad de otra app:
@@ -54,11 +59,14 @@ Si se vuelve a activar el Bloqueador automático, la depuración se bloquea otra
 
 ## Notas técnicas
 
-**El `--crop` va en coordenadas naturales del panel, no en las de la imagen que
-se ve.** scrcpy recorta antes de rotar, así que con la tablet en horizontal los
-ejes quedan transpuestos: para quitar 50 px arriba y 80 px abajo de la imagen
-apaisada hay que recortar sobre la *x* natural (`1190:2112:50:0`, panel de
-1320x2112). Un recorte "intuitivo" falla con
+**NoteIn no necesita recorte**: se dibuja a pantalla completa y oculta por su
+cuenta la barra de estado y la de navegación. Samsung Notes sí las muestra.
+
+**Si hace falta recortar, el `--crop` va en coordenadas naturales del panel, no
+en las de la imagen que se ve.** scrcpy recorta antes de rotar, así que con la
+tablet en horizontal los ejes quedan transpuestos: para quitar 50 px arriba y
+80 px abajo de la imagen apaisada hay que recortar sobre la *x* natural
+(`1190:2112:50:0`, panel de 1320x2112). Un recorte "intuitivo" falla con
 `Crop Rect(...) exceeds the input area`.
 
 **`policy_control` no sirve en Android 16.** Es el método clásico para el modo

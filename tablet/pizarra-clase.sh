@@ -7,12 +7,13 @@ set -euo pipefail
 
 TITULO="${1:-Pizarra}"
 BITRATE="${PIZARRA_BITRATE:-12M}"
-APP="${PIZARRA_APP:-com.samsung.android.app.notes/.memolist.MemoListActivity}"
+APP="${PIZARRA_APP:-com.orion.notein.global/com.orion.notein.MainActivity}"
 DND="${PIZARRA_DND:-none}"        # none = silencio total | priority = deja pasar favoritos
-# Recorta la barra de estado y la barra de tareas. Va en coordenadas NATURALES
-# del panel (1320x2112), no en las de la imagen horizontal: scrcpy aplica el
-# recorte antes de rotar, así que los ejes están transpuestos.
-CROP="${PIZARRA_CROP:-1190:2112:50:0}"
+# NoteIn se dibuja a pantalla completa y oculta las barras del sistema, así que
+# no hace falta recortar. Para una app que sí las muestre, el recorte va en
+# coordenadas NATURALES del panel (1320x2112): scrcpy recorta antes de rotar.
+# En horizontal, "1190:2112:50:0" quita barra de estado y barra de tareas.
+CROP="${PIZARRA_CROP:-}"
 
 ESTADO="${XDG_CACHE_HOME:-$HOME/.cache}/pizarra-clase.estado"
 
@@ -67,12 +68,12 @@ trap restaurar EXIT
 # --- Modo clase ---
 adb shell cmd notification set_dnd "$DND"              >/dev/null 2>&1 || true
 adb shell settings put system accelerometer_rotation 0 >/dev/null 2>&1 || true
-adb shell settings put system user_rotation 1          >/dev/null 2>&1 || true
+adb shell settings put system user_rotation 0          >/dev/null 2>&1 || true
 adb shell svc power stayon usb                         >/dev/null 2>&1 || true
 adb shell am start -n "$APP"                           >/dev/null 2>&1 || true
 
 echo "Tablet:  $(adb shell getprop ro.product.model 2>/dev/null | tr -d '\r')"
-echo "Modo clase: No molestar ($DND) · horizontal fijo · pantalla activa"
+echo "Modo clase: No molestar ($DND) · vertical fijo · pantalla activa"
 echo "Ventana: «$TITULO» — selecciónala al compartir pantalla"
 echo "(Cierra la ventana para restaurar la tablet)"
 echo
