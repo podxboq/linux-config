@@ -101,6 +101,17 @@ Si una sesión muere sin ejecutar su `trap`, el fichero sobrevive y la siguiente
 ejecución lo respeta en lugar de tomar el modo clase como configuración normal.
 No conviene borrarlo a mano mientras haya una sesión abierta.
 
+**KDE Connect necesita los puertos 1714-1764 (TCP y UDP) y el 5353/udp (mDNS)
+abiertos en las dos tablas del cortafuegos.** Aunque la tablet responda al ping,
+si falta alguno ninguno de los dos equipos ve al otro. En iptables ya estaban;
+en `/etc/nftables.conf` van tras la regla de ssh:
+
+```
+    tcp dport 1714-1764 accept comment "kdeconnect"
+    udp dport 1714-1764 accept comment "kdeconnect"
+    udp dport 5353 accept comment "mdns"
+```
+
 ## `digitalizadora.sh` — descartado, no usar
 
 Usa **weylus** para convertir la tablet en digitalizadora del PC y anotar con
