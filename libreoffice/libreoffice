@@ -1,0 +1,5 @@
+#!/bin/sh
+# LibreOffice (plugin qt6/kf6) no escala bien en Wayland con escalado
+# fraccionario: el contenido de la ventana sale encogido. Por XWayland sí.
+export QT_QPA_PLATFORM=xcb
+exec /usr/lib/libreoffice/program/soffice "$@"
