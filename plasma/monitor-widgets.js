@@ -10,11 +10,17 @@
 var IFACE   = "wlo1";
 var BATTERY = "power/123456789";
 
+// Colores del tema podxboq: verde salvia (acento) y azul pizarra apagado para
+// la segunda serie. Ambos con contraste ≥ 3:1 sobre el fondo claro del widget.
+var SALVIA  = "99,156,118";
+var PIZARRA = "94,134,173";
+
 var widgets = [
     {
         title: "CPU",
         face: "org.kde.ksysguard.linechart",
         high: ["cpu/all/usage"],
+        colors: { "cpu/all/usage": SALVIA },
         total: [],
         low: ["cpu/all/averageTemperature", "cpu/all/averageFrequency"],
         faceConfig: { rangeAutoY: false, rangeFromY: 0, rangeToY: 100, lineChartSmooth: true, showLegend: false }
@@ -23,6 +29,7 @@ var widgets = [
         title: "Memoria",
         face: "org.kde.ksysguard.piechart",
         high: ["memory/physical/used"],
+        colors: { "memory/physical/used": SALVIA },
         total: ["memory/physical/usedPercent"],
         low: ["memory/physical/total"],
         faceConfig: { rangeAuto: true, showLegend: false }
@@ -31,6 +38,7 @@ var widgets = [
         title: "Disco",
         face: "org.kde.ksysguard.piechart",
         high: ["disk/all/used"],
+        colors: { "disk/all/used": SALVIA },
         total: ["disk/all/usedPercent"],
         low: ["disk/all/free", "disk/all/read", "disk/all/write"],
         faceConfig: { rangeAuto: true, showLegend: false }
@@ -39,6 +47,7 @@ var widgets = [
         title: "Wi-Fi",
         face: "org.kde.ksysguard.linechart",
         high: ["network/" + IFACE + "/download", "network/" + IFACE + "/upload"],
+        colors: { ["network/" + IFACE + "/download"]: SALVIA, ["network/" + IFACE + "/upload"]: PIZARRA },
         total: [],
         low: ["network/" + IFACE + "/network", "network/" + IFACE + "/signal"],
         labels: { ["network/" + IFACE + "/network"]: "Red", ["network/" + IFACE + "/signal"]: "Señal" },
@@ -48,6 +57,7 @@ var widgets = [
         title: "Batería",
         face: "org.kde.ksysguard.piechart",
         high: [BATTERY + "/chargePercentage"],
+        colors: { [BATTERY + "/chargePercentage"]: SALVIA },
         total: [BATTERY + "/chargePercentage"],
         low: [BATTERY + "/chargeRate", BATTERY + "/health"],
         labels: { [BATTERY + "/chargePercentage"]: "Carga", [BATTERY + "/chargeRate"]: "Consumo", [BATTERY + "/health"]: "Salud" },
@@ -99,6 +109,10 @@ widgets.forEach(function (s, i) {
     w.currentConfigGroup = ["SensorLabels"];
     for (var id in s.labels || {})
         w.writeConfig(id, s.labels[id]);
+
+    w.currentConfigGroup = ["SensorColors"];
+    for (var id in s.colors || {})
+        w.writeConfig(id, s.colors[id]);
 
     w.currentConfigGroup = ["FaceConfig"];
     for (var k in s.faceConfig)
