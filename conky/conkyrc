@@ -19,7 +19,7 @@ conky.config = {
     own_window_type = 'normal',
     own_window_argb_visual = true,
     own_window_argb_value = 220,
-    own_window_colour = '0D1F2D',
+    own_window_colour = '1C211E',
     own_window_hints = 'undecorated,sticky,skip_taskbar,skip_pager,below',
     border_inner_margin = 10,
     border_outer_margin = 0,
@@ -35,14 +35,14 @@ conky.config = {
     xftalpha = 1.0,
     uppercase = false,
 
-    -- Paleta podxboq oscura
-    default_color = '#E8F1F5',   -- texto principal
-    color1 = '#5B8FA8',          -- encabezados de sección (azul medio)
-    color2 = '#8FA3AF',          -- texto secundario / valores menores
-    color3 = '#4A6070',          -- separadores / texto muy tenue
-    color4 = '#2ECC71',          -- positivo / verde
-    color5 = '#E05C4B',          -- alerta / rojo
-    color6 = '#D4AC0D',          -- neutro / ámbar
+    -- Paleta podxboq oscura (verde salvia)
+    default_color = '#E6EBE7',   -- texto principal
+    color1 = '#8CC09D',          -- encabezados de sección (verde salvia)
+    color2 = '#A5ACA8',          -- texto secundario / valores menores
+    color3 = '#4E5852',          -- separadores / texto muy tenue
+    color4 = '#9BD3A8',          -- positivo / verde claro
+    color5 = '#E07A6E',          -- alerta / rojo
+    color6 = '#D9B46A',          -- neutro / ámbar
 }
 
 conky.text = [[
@@ -57,7 +57,7 @@ ${color2}  ${sysname} ${kernel}
 ${color3}${hr 1}${color}
 ${color1}${font Source Sans 3:semibold:size=9}CPU${font}  ${color2}${hwmon coretemp temp 1}°C${alignr}${color}${cpu cpu0}%
 ${color1}${cpubar cpu0 4,220}${color}
-${color1}${cpugraph cpu0 28,220 2C6E8A 7BAFD4}${color}
+${color1}${cpugraph cpu0 28,220 3F7350 8CC09D}${color}
 ${color2}  ${top name 1}${alignr}${top cpu 1}%
   ${top name 2}${alignr}${top cpu 2}%
   ${top name 3}${alignr}${top cpu 3}%
@@ -65,7 +65,7 @@ ${color2}  ${top name 1}${alignr}${top cpu 1}%
 ${color3}${hr 1}${color}
 ${color1}${font Source Sans 3:semibold:size=9}MEMORIA${font}${alignr}${color2}${mem} / ${memmax}${color}
 ${color1}${membar 4,220}${color}
-${color1}${memgraph 28,220 2C6E8A 7BAFD4}${color}
+${color1}${memgraph 28,220 3F7350 8CC09D}${color}
 ${color2}  ${top_mem name 1}${alignr}${top_mem mem 1}%
   ${top_mem name 2}${alignr}${top_mem mem 2}%
   ${top_mem name 3}${alignr}${top_mem mem 3}%
@@ -73,13 +73,13 @@ ${color2}  ${top_mem name 1}${alignr}${top_mem mem 1}%
 ${color3}${hr 1}${color}
 ${color1}${font Source Sans 3:semibold:size=9}DISCO${font}${alignr}${color2}${fs_used /} / ${fs_size /}${color}
 ${color1}${fs_bar 4,220 /}${color}
-${color1}${diskiograph nvme0n1 28,220 2C6E8A 7BAFD4}${color}
+${color1}${diskiograph nvme0n1 28,220 3F7350 8CC09D}${color}
 
 ${color3}${hr 1}${color}
 ${color1}${font Source Sans 3:semibold:size=9}RED${font}  ${color2}${wireless_essid wlo1}${alignr}${wireless_link_qual_perc wlo1}%${color}
 ${color1}${wireless_link_bar 4,220 wlo1}${color}
 ${color2}  ↓ ${color}${downspeed wlo1}${alignr}${color2}↑ ${color}${upspeed wlo1}
-${color1}${downspeedgraph wlo1 28,108 2ECC71 27AE60} ${upspeedgraph wlo1 28,108 5B8FA8 2C6E8A}${color}
+${color1}${downspeedgraph wlo1 28,108 9BD3A8 5E9E72} ${upspeedgraph wlo1 28,108 7FA8CC 4F7A9E}${color}
 ${color3}  ${addr wlo1}${color}
 
 ${color3}${hr 1}${color}
