@@ -35,7 +35,7 @@ conky.config = {
     xftalpha = 1.0,
     uppercase = false,
 
-    -- Paleta Neblina oscura
+    -- Paleta podxboq oscura
     default_color = '#E8F1F5',   -- texto principal
     color1 = '#5B8FA8',          -- encabezados de sección (azul medio)
     color2 = '#8FA3AF',          -- texto secundario / valores menores
