@@ -1,0 +1,12 @@
+[Common]
+OutlineCloseButton=true
+
+[Style]
+DockWidgetDrawFrame=true
+MenuItemDrawStrongFocus=false
+ScrollBarAddLineButtons=2
+ScrollBarSubLineButtons=2
+SidePanelDrawFrame=true
+
+[Windeco]
+ButtonSize=ButtonSmall

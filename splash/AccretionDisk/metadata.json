@@ -1,0 +1,20 @@
+{
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "",
+                "Name": "fbm224"
+            }
+        ],
+        "Category": "Plasma 6 Splashscreens",
+        "Description": "BH_AccretionDisk_Sim_360_wide_16x9_1080",
+        "Id": "AccretionDisk",
+        "License": "GPLv3",
+        "Name": "AccretionDisk",
+        "Website": ""
+    },
+    "Keywords": "Desktop;Workspace;Appearance;Look and Feel;Logout;Lock;Suspend;Shutdown;Hibernate;",
+    "X-Plasma-APIVersion": "2"
+}
+
