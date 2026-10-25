@@ -1,0 +1,20 @@
+{
+    "KPlugin": {
+        "Id": "org.podxboq.monitor",
+        "Name": "podxboq Monitor",
+        "Description": "Monitor del sistema en un único widget de escritorio, al estilo conky",
+        "Icon": "utilities-system-monitor",
+        "Authors": [
+            {
+                "Name": "podxboq"
+            }
+        ],
+        "Category": "System Information",
+        "Version": "0.1",
+        "License": "GPL-3.0+"
+    },
+    "KPackageStructure": "Plasma/Applet",
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-MainScript": "ui/main.qml"
+}

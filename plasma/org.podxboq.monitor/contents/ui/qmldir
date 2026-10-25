@@ -1,0 +1,6 @@
+singleton Style Style.qml
+Graph Graph.qml
+Lbl Lbl.qml
+Tile Tile.qml
+Tiles Tiles.qml
+Banner Banner.qml
