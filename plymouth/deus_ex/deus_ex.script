@@ -33,8 +33,9 @@ for (i = 0; i < 375; i++)
 flyingman_sprite = Sprite();
 
 # set image position
-flyingman_sprite.SetX(Window.GetX() + (Window.GetWidth(0) / 2 - flyingman_image[0].GetWidth() / 2)); # Place images in the center
-flyingman_sprite.SetY(Window.GetY() + (Window.GetHeight(0) / 2 - flyingman_image[0].GetHeight() / 2));
+# Frames are cropped from 800x600 to 289x283 (offset 255,155): same place as the full frame centered
+flyingman_sprite.SetX(Window.GetX() + (Window.GetWidth(0) / 2 - 400 + 255)); # Place images in the center
+flyingman_sprite.SetY(Window.GetY() + (Window.GetHeight(0) / 2 - 300 + 155));
 
 progress = 0;
 
