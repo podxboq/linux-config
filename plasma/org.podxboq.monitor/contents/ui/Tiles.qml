@@ -228,7 +228,7 @@ Item {
             subtitle: view.batteryStatus
             level: view.chargeLevel(view.battery)
         }
-        // Teclado y ratón: Logitech solo informa de niveles, de ahí el "~"
+        // Teclado y ratón (Logitech): UPower solo recibe niveles aproximados
         Rectangle {
             Layout.fillWidth: true
             Layout.preferredWidth: 1
@@ -267,7 +267,7 @@ Item {
                         }
                         Lbl { Layout.fillWidth: true; text: modelData.name; color: Style.muted; font.pointSize: 9 }
                         Lbl {
-                            text: "~" + Math.round(modelData.value) + " %"
+                            text: Math.round(modelData.value) + " %"
                             color: view.chargeLevel(modelData.value) === "alert" ? Style.alert
                                  : view.chargeLevel(modelData.value) === "warn" ? Style.warn
                                  : Style.text
