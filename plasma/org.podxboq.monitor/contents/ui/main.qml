@@ -17,7 +17,6 @@ PlasmoidItem {
 
     readonly property int historySize: 60
 
-    property var now: new Date()
     property string kernel: ""
     property var topCpu: []
     property var topMem: []
@@ -93,7 +92,6 @@ PlasmoidItem {
         repeat: true
         triggeredOnStart: true
         onTriggered: {
-            root.now = new Date()
             root.cpuHist = root.push(root.cpuHist, root.num(sCpu))
             root.tempHist = root.push(root.tempHist, root.num(sCpuTemp))
             root.memHist = root.push(root.memHist, root.num(sMemPct))
@@ -131,7 +129,6 @@ PlasmoidItem {
         Layout.minimumWidth: 260
         Layout.preferredWidth: 320
 
-        now: root.now
         kernel: root.kernel
         uptime: root.num(sUptime)
         cpu: root.num(sCpu)

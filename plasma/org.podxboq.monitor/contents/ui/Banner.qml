@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 
-// Tarjeta centrada: un valor grande y una línea pequeña debajo (reloj, uptime).
+// Tarjeta centrada: un valor grande y una línea pequeña debajo (uptime).
 Rectangle {
     property string value: ""
     property string subtitle: ""

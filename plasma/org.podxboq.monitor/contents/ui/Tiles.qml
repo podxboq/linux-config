@@ -7,7 +7,6 @@ import org.kde.kirigami as Kirigami
 Item {
     id: view
 
-    property var now: new Date()
     property string kernel: ""
     property real uptime: 0
 
@@ -112,16 +111,10 @@ Item {
         columnSpacing: 6
         rowSpacing: 6
 
-        // Reloj y uptime
+        // Uptime
         Banner {
+            Layout.columnSpan: 2
             Layout.fillWidth: true
-            Layout.preferredWidth: 1
-            value: Qt.formatDateTime(view.now, "HH:mm")
-            subtitle: Qt.locale().toString(view.now, "ddd, d MMM yyyy")
-        }
-        Banner {
-            Layout.fillWidth: true
-            Layout.preferredWidth: 1
             value: view.fmtUptime(view.uptime)
             subtitle: "Uptime · " + view.kernel.replace(/^Linux /, "").split("-")[0]
         }
