@@ -12,6 +12,25 @@ Window {
     height: view.implicitHeight + 24
     color: "#5B6B72"
 
+    function agenda() {
+        var base = new Date()
+        var now = base.getTime()
+        var min = 60000
+        var sample = {
+            0: [{ title: "Reunión de equipo (finalizada)", time: "08:30", color: "#fd9e18", start: now - 150 * min, end: now - 90 * min },
+                { title: "Tutoría (empieza en 10 min)", time: "10:00", color: "#364755", start: now + 10 * min, end: now + 70 * min },
+                { title: "Clase de la tarde", time: "17:30", color: "#364755", start: now + 300 * min, end: now + 360 * min }],
+            1: [{ title: "(ALCC/MCC/16667) Inicio del tema", time: "", color: "#364755", start: 0, end: 0 },
+                { title: "Tutoría con estudiantes", time: "17:30", color: "#364755", start: now + 1800 * min, end: now + 1860 * min }],
+            4: [{ title: "Cumpleaños familiar", time: "", color: "#fd9e18", start: 0, end: 0 }],
+            5: [{ title: "Entrega de actividad", time: "23:59", color: "#364755", start: now + 7000 * min, end: now + 7001 * min }]
+        }
+        var out = []
+        for (var i = 0; i < 15; i++)
+            out.push({ date: new Date(base.getFullYear(), base.getMonth(), base.getDate() + i), events: sample[i] || [] })
+        return out
+    }
+
     function wave(base, amp, phase) {
         var out = []
         for (var i = 0; i < 60; i++)
@@ -46,6 +65,7 @@ Window {
         mouse: 22
         topCpu: [{ name: "plasmashell", value: 7.3 }, { name: "claude", value: 6.6 }, { name: "conky", value: 0.7 }]
         topMem: [{ name: "plasmashell", value: 3.5 }, { name: "claude", value: 2.6 }, { name: "vivaldi-bin", value: 2.4 }]
+        agenda: win.agenda()
         cpuHist: win.wave(25, 12, 0)
         tempHist: win.wave(60, 6, 1)
         memHist: win.wave(37, 2, 2)

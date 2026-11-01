@@ -4,6 +4,7 @@ import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.plasma5support as P5Support
 import org.kde.ksysguard.sensors as Sensors
+import org.kde.plasma.workspace.calendar as PimCalendar
 
 PlasmoidItem {
     id: root
@@ -16,10 +17,13 @@ PlasmoidItem {
     readonly property string mouseId: "33-e5-e2-23"       // Logitech Wireless Mouse
 
     readonly property int historySize: 60
+    readonly property int agendaDays: 15
 
     property string kernel: ""
     property var topCpu: []
     property var topMem: []
+    property var agenda: []
+    property var agendaStart: new Date()
     property var cpuHist: []
     property var tempHist: []
     property var memHist: []
@@ -86,6 +90,96 @@ PlasmoidItem {
     Sensors.Sensor { id: sMouse; sensorId: "power/" + root.mouseId + "/chargePercentage" }
     Sensors.Sensor { id: sUptime; sensorId: "os/system/uptime" }
 
+    // Agenda: eventos de los calendarios marcados en el plugin «Eventos del
+    // calendario» de Plasma (pimevents), que lee Akonadi (Kontact). Solo se
+    // muestran los marcados en ~/.config/plasmashellrc:
+    //   [PIMEventsPlugin]
+    //   calendars=109,129      # ids de colección de Akonadi (GESACA, Personal)
+    // Cada Calendar cubre una cuadrícula de 42 días del mes que muestra; se usan
+    // dos para que los 15 días queden dentro aunque crucen de mes.
+    PimCalendar.EventPluginsManager {
+        id: pim
+        enabledPlugins: ["pimevents"]
+    }
+    PimCalendar.Calendar {
+        id: calStart
+        days: 7
+        weeks: 6
+        today: root.agendaStart
+        displayedDate: root.agendaStart
+        Component.onCompleted: daysModel.setPluginsManager(pim)
+    }
+    PimCalendar.Calendar {
+        id: calEnd
+        days: 7
+        weeks: 6
+        today: root.agendaStart
+        displayedDate: new Date(root.agendaStart.getFullYear(), root.agendaStart.getMonth(),
+                                root.agendaStart.getDate() + root.agendaDays - 1)
+        Component.onCompleted: daysModel.setPluginsManager(pim)
+    }
+
+    function eventsOf(date) {
+        var list = calStart.daysModel.eventsForDate(date)
+        return list.length > 0 ? list : calEnd.daysModel.eventsForDate(date)
+    }
+
+    function buildAgenda() {
+        var start = root.agendaStart
+        var out = []
+        for (var i = 0; i < agendaDays; i++) {
+            var date = new Date(start.getFullYear(), start.getMonth(), start.getDate() + i)
+            var evs = []
+            var list = eventsOf(date)
+            for (var j = 0; j < list.length; j++) {
+                var e = list[j]
+                evs.push({
+                    title: String(e.title),
+                    time: e.isAllDay ? "" : Qt.formatTime(e.startDateTime, "HH:mm"),
+                    color: String(e.eventColor),
+                    start: e.isAllDay ? 0 : e.startDateTime.getTime(),
+                    end: e.isAllDay ? 0 : e.endDateTime.getTime()
+                })
+            }
+            // Primero los de todo el día, luego por hora
+            evs.sort(function (a, b) { return a.start - b.start })
+            out.push({ date: date, events: evs })
+        }
+        root.agenda = out
+    }
+
+    // Los datos llegan por lotes: se reconstruye una vez pasada la ráfaga
+    Timer {
+        id: agendaRefresh
+        interval: 300
+        onTriggered: root.buildAgenda()
+    }
+    Connections {
+        target: calStart.daysModel
+        function onAgendaUpdated() { agendaRefresh.restart() }
+    }
+    Connections {
+        target: calEnd.daysModel
+        function onAgendaUpdated() { agendaRefresh.restart() }
+    }
+    Connections {
+        target: pim
+        function onEventModified() { agendaRefresh.restart() }
+        function onEventRemoved() { agendaRefresh.restart() }
+    }
+
+    // Al cambiar de día, la agenda arranca en el nuevo día
+    Timer {
+        interval: 60000
+        running: true
+        repeat: true
+        onTriggered: {
+            var now = new Date()
+            if (now.toDateString() !== root.agendaStart.toDateString())
+                root.agendaStart = now
+        }
+    }
+
     Timer {
         interval: 1000
         running: true
@@ -150,6 +244,7 @@ PlasmoidItem {
         mouse: root.optionalPercent(sMouse)
         topCpu: root.topCpu
         topMem: root.topMem
+        agenda: root.agenda
         cpuHist: root.cpuHist
         tempHist: root.tempHist
         memHist: root.memHist

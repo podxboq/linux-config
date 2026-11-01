@@ -29,6 +29,7 @@ Item {
     property real mouse: -1
     property var topCpu: []
     property var topMem: []
+    property var agenda: []    // ver Agenda.qml
 
     property var cpuHist: []
     property var tempHist: []
@@ -323,6 +324,14 @@ Item {
                     }
                 }
             }
+        }
+
+        // Agenda: los próximos días, con la altura de tres tarjetas
+        Agenda {
+            Layout.columnSpan: 2
+            Layout.fillWidth: true
+            Layout.preferredHeight: 3 * 76 + 2 * grid.rowSpacing
+            days: view.agenda
         }
     }
 }

@@ -10,9 +10,14 @@
 //
 // W y H son el tamaño natural de la vista (Tiles.qml con 320 px de ancho).
 // Si se añaden o quitan tarjetas hay que recalcular H con tests/preview.qml.
+//
+// La tarjeta de agenda muestra los calendarios marcados para el plugin
+// «Eventos del calendario» de Plasma (ids de colección de Akonadi: 109 GESACA,
+// 129 Personal). Para marcarlos:
+//   kwriteconfig6 --file plasmashellrc --group PIMEventsPlugin --key calendars 109,129
 
 var PLUGIN = "org.podxboq.monitor";
-var W = 320, H = 548, MARGIN = 16;
+var W = 320, H = 794, MARGIN = 16;
 
 var desk = desktops().filter(function (d) { return d.screen === 0; })[0];
 var screen = screenGeometry(desk.screen);
